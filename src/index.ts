@@ -83,7 +83,6 @@ interface SmallRelease {
                     new Date(a.published_at as string).getTime())
         );
 
-        core.info(`Limit: ${inputs.limit} (${typeof inputs.limit})`)
         let releases: SmallRelease[] = releaseList
             .slice(0, Number.isNaN(inputs.limit) ? releaseList.length : inputs.limit)
             .map(x => ({
