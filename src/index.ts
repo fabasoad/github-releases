@@ -60,9 +60,7 @@ interface SmallRelease {
     try {
         const inputs: ActionInputs = getInputs();
 
-        core.info('test');
-        core.info(`Limit: ${inputs.limit}`);
-        core.info(`Getting1 versions for:\n  repository: ${inputs.repository}\n  owner: ${inputs.owner}`);
+        core.info(`Getting versions for:\n  repository: ${inputs.repository}\n  owner: ${inputs.owner}`);
 
         const github = getOctokit(process.env.GITHUB_TOKEN as string);
 
