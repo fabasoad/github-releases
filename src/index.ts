@@ -85,7 +85,7 @@ interface SmallRelease {
 
         core.info(`Limit: ${inputs.limit} (${typeof inputs.limit})`)
         let releases: SmallRelease[] = releaseList
-            .slice(0, inputs.limit == 0 ? releaseList.length : inputs.limit)
+            .slice(0, Number.isNaN(inputs.limit) ? releaseList.length : inputs.limit)
             .map(x => ({
                 name: x.name,
                 tag_name: x.tag_name,
