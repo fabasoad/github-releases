@@ -1,6 +1,6 @@
 import * as core from '@actions/core';
 import { context } from '@actions/github';
-import { isBlank, getBooleanInput } from '@yakubique/atils/dist';
+import { isBlank, getBooleanInput, getNumberInput } from '@yakubique/atils/dist';
 
 enum Inputs {
     Repository = 'repository',
@@ -8,8 +8,8 @@ enum Inputs {
     Debug = 'debug',
     Details = 'details',
     SortVersions = 'sort',
+    Limit = 'limit',
 }
-
 
 export interface ActionInputs {
     repository: string;
@@ -18,6 +18,7 @@ export interface ActionInputs {
     debug: boolean;
     details: boolean;
     sortVersions: number;
+    limit: number;
 }
 
 export function getInputs(): ActionInputs {
@@ -54,6 +55,7 @@ export function getInputs(): ActionInputs {
     result.debug = getBooleanInput(Inputs.Debug, { required: false });
     result.preReleases = getBooleanInput(Inputs.PreReleases, { required: false });
     result.details = getBooleanInput(Inputs.Details, { required: false });
+    result.limit = getNumberInput(Inputs.Limit, { required: false });
 
     return result;
 }

@@ -20,6 +20,9 @@ inputs:
   sort:
     description: 'Sort releases by publication date ["ASC", "DESC"] (default :"ASC")'
     default: 'ASC'
+  limit:
+    description: The maximum number of records to return
+    required: false
 outputs:
   releases: # id of output
     description: JSON list of releases

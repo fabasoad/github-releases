@@ -77,18 +77,20 @@ interface SmallRelease {
             .filter(release => !release.draft &&
                 (!release.prerelease || inputs.preReleases)) as Release[];
 
-        const releases = releaseList.map(x => ({
-            name: x.name,
-            tag_name: x.tag_name,
-            prerelease: x.prerelease,
-            published_at: x.published_at
-        })) as SmallRelease[];
-
-        releases.sort(
-            (a, b) =>
+        releaseList.sort(
+            (a: Release, b: Release) =>
                 inputs.sortVersions * (new Date(b.published_at as string).getTime() -
                     new Date(a.published_at as string).getTime())
         );
+
+        let releases: SmallRelease[] = releaseList
+            .slice(0, inputs.limit == 0 ? releaseList.length : inputs.limit)
+            .map(x => ({
+                name: x.name,
+                tag_name: x.tag_name,
+                prerelease: x.prerelease,
+                published_at: x.published_at
+            }));
 
         if (inputs.details) {
             setOutputs({ releases }, inputs.debug);
